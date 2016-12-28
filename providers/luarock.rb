@@ -22,7 +22,11 @@
 require 'mixlib/shellout'
 
 def luarocks
-  "#{node['openresty']['source']['prefix']}/luajit/bin/luarocks"
+  if node['openresty']['luarocks']['install_method'] == "source"
+    "#{node['openresty']['source']['prefix']}/luajit/bin/luarocks"
+  else
+    "luarocks"
+  end
 end
 
 def get_installed_rock_version(rock, version = nil)
